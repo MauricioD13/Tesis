@@ -26,15 +26,15 @@ with open('out-01.csv', 'r') as f:
             
     num = []
     index = 0
-    values = list(reader)
-    """for idx, value in enumerate(reader):
-            
+    
+    for idx, value in enumerate(reader):
+        
         try:
             table.add_row("["+str(idx)+"]",value[0],value[3],value[4],value[5],value[6],value[7],value[13])
         except IndexError:
             index = idx
             break
-        num.append(str(idx))"""
+        num.append(str(idx))
     
     console.print(table)
-    option = int(Prompt.ask("Interfaz: ", choices=num))
+    #option = int(Prompt.ask("Interfaz: ", choices=num))

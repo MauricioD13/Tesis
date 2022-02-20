@@ -80,4 +80,4 @@ async def deauth():
         os.system('sudo airmon-ng stop wlan0mon')
         #asyncio.run(deauth())
         exit()
-asyncio.run(scan_for_targets())
+asyncio.run(deauth())
