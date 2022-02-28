@@ -10,10 +10,18 @@ async def main():
     #              choices=))
     interface = 'wlp2s0'
     airmon = wifi.Airmon(interface)
-    await airmon.monitor_mode()
+    try:
+        await airmon.monitor_mode()
+    except:
+        print('[Nombre de interfaz mal escrito o ya esta en modo monitor]')
 
-    airodump = wifi.Airodump(interface)
-    await airodump.general_scan()
+    airodump = wifi.Airodump(interface+'mon')
+    print('[Escaneo de APs iniciando...]')
+    print('[ctl + c para salir]')
+    try:
+        await airodump.general_scan()
+    except:
+        pass
 
 
 async def scan_for_targets():

@@ -5,7 +5,19 @@ import asyncio
 
 class Command_Template:
     def __init__(self):
+        self.interface
         self.command
+
+    def report():
+        pass
+
+
+"""
+Todos los comandos tiene su propia clase, y el atributo
+command contiene el comando que se ingresará a la terminal
+    Returns:
+        _type_: _description_
+"""
 
 
 class Airmon:
@@ -15,6 +27,7 @@ class Airmon:
 
     async def monitor_mode(self):
         out = sp.check_output([self.command, 'start', self.interface])
+        print(out)
 
 
 class Airodump:
@@ -24,7 +37,7 @@ class Airodump:
 
     async def general_scan(self):
         out = sp.check_output(
-            [self.command, '--output-format csv', '-w', ' general_scan', self.interface])
+            [self.command, '--output-format', 'csv', '-w', 'general_scan', self.interface])
 
 
 class Aireplay:
