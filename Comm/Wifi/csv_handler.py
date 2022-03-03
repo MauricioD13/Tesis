@@ -12,7 +12,6 @@ def csv_handler(name):
         reader = csv.reader(f, delimiter=',')
         next(reader)
         headers = next(reader)
-        print(headers)
 
         # Prompt options
         table = Table(show_header=True, header_style='bold magenta')

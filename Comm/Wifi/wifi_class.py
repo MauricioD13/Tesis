@@ -25,7 +25,7 @@ class Airmon:
         self.interface = interface
         self.command = 'airmon-ng'
 
-    async def monitor_mode(self):
+    def monitor_mode(self):
         out = sp.check_output([self.command, 'start', self.interface])
         print(out)
 
@@ -39,9 +39,9 @@ class Airodump:
         out = sp.check_output(
             [self.command, '--output-format', 'csv', '-w', 'general_scan', self.interface])
 
-    async def channel_scan(self, channel):
-        out = sp.check_output([self.command, '-c', channel, '--output-format',
-                              'csv', '-w', 'channel_scan', self.interface])
+    def AP_scan(self, channel, BSSID, AP_NAME):
+        out = sp.check_output([self.command, '-c', channel, '--bssid',
+                              BSSID, '-w', 'AP', self.interface])
 
 
 class Aireplay:
@@ -51,10 +51,11 @@ class Aireplay:
         self.command = 'aireplay-ng'
         self.interface = interface
 
-    async def DDoS(self):
-        sp.check_output([self.command, ' -0', '10', '-a',
-                        self.ap['AP_MAC'], self.interface])
+    def DDoS(self):
+        out = sp.check_output([self.command, '-0', '20', '-a',
+                               self.ap['AP_MAC'], self.interface])
+        print(out)
         return 1
 
-    async def channel(self, interface):
+    def channel(self, interface):
         os.system('sudo airodump-ng -c 2 ' + interface)
