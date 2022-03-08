@@ -130,3 +130,5 @@ dmypy.json
 
 *.csv
 Comm/__pycache__/
+*.cap
+*.netxml

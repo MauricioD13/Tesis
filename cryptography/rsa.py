@@ -55,6 +55,8 @@ if __name__ == '__main__':
     signature = msg_signature(msg, privKey, pubKey)
     verify_sign(msg, privKey, pubKey, signature)
     msg = msg + binascii.hexlify(signature).decode('utf-8')
+
     crypt_msg, tag = encrypt_msg(b'clave_secreta_13', msg.encode('utf-8'))
+    # Tipo: Bytes -> crypt_msg
     crypt_msg = binascii.hexlify(crypt_msg).decode('utf-8')
     os.system(f'mosquitto_pub -t /prueba -d -h 192.168.1.10 -m "{crypt_msg}"')
