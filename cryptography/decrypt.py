@@ -51,7 +51,8 @@ print (signa_rx)
 ### Comprobar firma
 
 message = message.encode()
-signa_rx2 = signa_rx.encode('latin-1')#.decode('utf-8')
+signa_rx2 = signa_rx.encode()
+signa_rx2=signa_rx2.decode('unicode_escape').encode('ISO-8859-1')
 
 print(signa_rx2)
 
@@ -59,3 +60,4 @@ pubKey = load_key()
 verify_sign(message, pubKey, signa_rx2)
 
 print(message)
+
