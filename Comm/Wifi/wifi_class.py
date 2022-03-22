@@ -2,16 +2,6 @@ import os
 import subprocess as sp
 import asyncio
 
-
-class Command_Template:
-    def __init__(self):
-        self.interface
-        self.command
-
-    def report():
-        pass
-
-
 """
 Todos los comandos tiene su propia clase, y el atributo
 command contiene el comando que se ingresará a la terminal
@@ -56,6 +46,3 @@ class Aireplay:
                                self.ap['AP_MAC'], self.interface])
         print(out)
         return 1
-
-    def channel(self, interface):
-        os.system('sudo airodump-ng -c 2 ' + interface)

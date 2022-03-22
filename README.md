@@ -15,6 +15,7 @@ Se realizo una [lista](Lista_Estandares.xlsx) donde recopilaron las clausulas a 
 ## Ambiente de simulación
 
 Con el objetivo de testear las clausulas elegidas y el alcance seleccionado, se propuso la siguiente arquitectura como ambiente de simulación:
+
 ![Img](img/simulacion.png)
 
 **Dispositivos**:
