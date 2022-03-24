@@ -1,12 +1,14 @@
 import requests
 import json
 from credentials import identity_hash
+import importlib.util
+from config import AUTH_param, CONFIDENTIALITY, INTEGRITY
 
 
-def main():
-
+def http_post(crypt_msg):
+    print(type(crypt_msg))
     msg = 'Mensaje de prueba'
-    data = {'msg': msg}
+    data = {'msg': crypt_msg}
     hash_id = identity_hash('1')
     data['id'] = '1'
     data['hash'] = hash_id
@@ -19,14 +21,17 @@ def get():
 
 
 if __name__ == '__main__':
-    main()
-    """ url = '127.0.0.0:5000'
-    url = url + '/post'
-    data = '{"name": "Mauro"}'
-    data = "'" + data + "'"
-    cont_type = "Content-type: application/json"
-    cont_type = "'" + cont_type + "'"
-    out = sp.check_output(['curl', '-H', cont_type,
-                           '-X', 'POST', '-d', data, url])
-    print(out)
-    """
+    spec = importlib.util.spec_from_file_location(
+        "rsa", "/home/guasonito/Documents/Universidad/Tesis/Tesis/cryptography/rsa.py")
+    rsa = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(rsa)
+
+    message = 'Si sirve'
+
+    if CONFIDENTIALITY == 1 and INTEGRITY == 1:
+        crypt_msg = rsa.cipher_signature(message)
+    elif INTEGRITY == 1:
+        crypt_msg = rsa.just_signature(message)
+    else:
+        crypt_msg = message
+    http_post(crypt_msg)
