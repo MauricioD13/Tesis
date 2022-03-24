@@ -10,7 +10,6 @@ from Crypto.Cipher import AES
 
 
 def load_key():
-    print(os.system('pwd'))
     with open('./mosq-ca.pub', 'r') as src:
         pubKey = RSA.import_key(src.read())
 
@@ -84,3 +83,4 @@ def integrity_confirm(message_signa):
 
 if __name__ == '__main__':
     print(decrypt_msg(sys.argv[1]))
+
