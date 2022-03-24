@@ -21,7 +21,7 @@ def post_data():
     if request.method == 'POST':
         body = request.get_data()
         if body is None:
-            return 'The body is null', 400
+            return 'DATA is null', 400
         else:
             body = body.decode()
             msg_dict = ast.literal_eval(body)
