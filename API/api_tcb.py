@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 app.config['SECRET_KEY'] = 'my-secret-key'
 spec = importlib.util.spec_from_file_location(
-    "decrypt_fernet", "/home/guasonito/Documents/Universidad/Tesis/Tesis/cryptography/decrypt_fernet.py")
+    "decrypt_fernet", "/home/estudiante/Tesis/cryptography/decrypt_fernet.py")
 decrypt = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(decrypt)
 
@@ -42,7 +42,8 @@ def post_data():
                 print(plaintext)
             if AUTH_param == 1:
                 identity_auth(msg_dict, secret)
-
+            else:
+                print('[No autenticado]')
             return '[ACK]', 400
         return 'A POST has been received', 400
     else:
