@@ -7,7 +7,7 @@ import importlib.util
 import os
 
 app = Flask(__name__)
-app.config["DEBUG"] = True
+app.config["DEBUG"] = False
 app.config['SECRET_KEY'] = 'my-secret-key'
 spec = importlib.util.spec_from_file_location(
     "decrypt_fernet", "/home/estudiante/Tesis/cryptography/decrypt_fernet.py")
@@ -31,19 +31,19 @@ def post_data():
         else:
             body = body.decode()
             msg_dict = ast.literal_eval(body)
-            if CONFIDENTIALITY == 1 and INTEGRITY == 1:
-                print(f"Mensaje a recibido: {msg_dict['msg']}")
-                plaintext = decrypt.decrypt_msg(msg_dict['msg'])
-                print(f"Texto plano: {plaintext.decode()}")
 
-            elif INTEGRITY == 1:
-                print(f"Mensaje enviado: {msg_dict['msg']}")
+            print(f"Mensaje a recibido: {msg_dict['msg']}")
+            if CONFIDENTIALITY == 1 and INTEGRITY == 1:
+                plaintext = decrypt.decrypt_msg(msg_dict['msg'])
+
+            if INTEGRITY == 1:
                 plaintext = decrypt.integrity_confirm(msg_dict['msg'])
-                print(plaintext)
             if AUTH_param == 1:
                 identity_auth(msg_dict, secret)
             else:
                 print('[No autenticado]')
+        
+            print(f"Texto plano: {plaintext.decode()}")
             return '[ACK]', 400
         return 'A POST has been received', 400
     else:
